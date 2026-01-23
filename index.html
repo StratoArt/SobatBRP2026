@@ -20,6 +20,8 @@
             padding: 20px;
             display: flex;
             justify-content: center;
+            flex-direction: column;
+            align-items: center;
         }
 
         .main-card {
@@ -29,6 +31,7 @@
             border-radius: 15px;
             box-shadow: 0 8px 30px rgba(0,0,0,0.1);
             padding: 20px;
+            box-sizing: border-box;
         }
 
         .header { text-align: center; border-bottom: 2px solid #eee; margin-bottom: 20px; padding-bottom: 10px; }
@@ -87,6 +90,14 @@
         }
         .bg-blue { background: #e1f5fe; color: #01579b; }
         .bg-orange { background: #fff3e0; color: var(--accent); }
+
+        .copyright {
+            margin-top: 25px;
+            text-align: center;
+            font-size: 0.75rem;
+            color: #999;
+            line-height: 1.6;
+        }
     </style>
 </head>
 <body>
@@ -119,6 +130,11 @@
             <div id="v-final">-</div>
         </div>
     </div>
+</div>
+
+<div class="copyright">
+    Copyright 2026 by Amrizal Ivan. All rights reserved.<br>
+    Powered by Bro Gemini
 </div>
 
 <script>
@@ -166,7 +182,7 @@ const dataset = [
     {n:"LARVIN WP75 100X100GR", g:"B", r1:"30", r2:"3000", rw:"Rp1.200", tx:"Rp72", f:"Rp1.128", p:"BAG", c:"100 Pcs", s:"100 GR"},
     {n:"LESENTA WG80 100X100GR", g:"-", r1:"180", r2:"18000", rw:"Rp3.100", tx:"Rp186", f:"Rp2.914", p:"BAG", c:"100 Pcs", s:"100 GR"},
     {n:"LUNA SMART SC500 50X100ML", g:"B", r1:"90", r2:"9000", rw:"Rp3.100", tx:"Rp186", f:"Rp2.914", p:"BOT", c:"50 Pcs", s:"100 ML"},
-    {n:"LUNA SMART SC500 100X50ML", g:"B", r1:"90", r2:"9000", rw:"Rp1.600", tx:"Rp96", f:"Rp1.504", p:"BOT", c:"100 Pcs", s:"50 ML"},
+    {n:"LUNA SMART SC500 100X50ML", g:"B", r1:"90", r2:"9000", rw:"Rp1.600", tx:"96", f:"Rp1.504", p:"BOT", c:"100 Pcs", s:"50 ML"},
     {n:"MOVENTO ENERGY SC240 50X100ML", g:"B", r1:"65", r2:"6500", rw:"Rp2.400", tx:"Rp144", f:"Rp2.256", p:"BOT", c:"50 Pcs", s:"100 ML"},
     {n:"MOVENTO ENERGY SC240 100X50ML", g:"B", r1:"65", r2:"6500", rw:"Rp1.300", tx:"Rp78", f:"Rp1.222", p:"BOT", c:"100 Pcs", s:"50 ML"},
     {n:"NATIVO WG75 30X(10X12.5GR)", g:"A", r1:"52.5", r2:"5250", rw:"Rp350", tx:"Rp21", f:"Rp329", p:"BAG", c:"30 Pcs", s:"12.5 GR"},
