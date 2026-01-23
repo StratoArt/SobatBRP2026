@@ -10,6 +10,7 @@
             --bg: #f0f2f5;
             --card: #ffffff;
             --text: #333;
+            --accent: #e65100;
         }
 
         body {
@@ -75,16 +76,17 @@
         .final-reward-box small { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; }
         .final-reward-box div { font-size: 1.8rem; font-weight: 800; margin-top: 5px; }
 
-        .group-badge {
+        .badges { margin-bottom: 10px; }
+        .badge {
             display: inline-block;
-            background: #e1f5fe;
-            color: #01579b;
             padding: 2px 10px;
             border-radius: 5px;
             font-size: 0.8rem;
             font-weight: bold;
-            margin-bottom: 10px;
+            margin-right: 5px;
         }
+        .bg-blue { background: #e1f5fe; color: #01579b; }
+        .bg-orange { background: #fff3e0; color: var(--accent); }
     </style>
 </head>
 <body>
@@ -100,7 +102,13 @@
     </select>
 
     <div id="display-info">
-        <div id="v-group" class="group-badge">GROUP -</div>
+        <div class="badges">
+            <span id="v-group" class="badge bg-blue">GROUP -</span>
+            <span id="v-pack" class="badge bg-orange">PCS</span>
+        </div>
+        
+        <div class="data-row"><span class="data-label">Ukuran Kemasan</span><span id="v-size" class="data-value" style="color:var(--accent)">-</span></div>
+        <div class="data-row"><span class="data-label">Isi per Dus</span><span id="v-pcs" class="data-value">-</span></div>
         <div class="data-row"><span class="data-label">Point R1</span><span id="v-r1" class="data-value">-</span></div>
         <div class="data-row"><span class="data-label">Point R2</span><span id="v-r2" class="data-value">-</span></div>
         <div class="data-row"><span class="data-label">Reward Sobat</span><span id="v-reward" class="data-value">-</span></div>
@@ -115,80 +123,78 @@
 
 <script>
 const dataset = [
-    {n:"ADENGO (ICB) SC315 100X100ML", g:"-", r1:"180", r2:"18000", rw:"Rp2.500", tx:"Rp150", f:"Rp2.350"},
-    {n:"ADENGO SC315 100X50ML", g:"-", r1:"90", r2:"9000", rw:"Rp1.200", tx:"Rp72", f:"Rp1.128"},
-    {n:"AGRIDEX EC715 12X1L", g:"B", r1:"12", r2:"1200", rw:"Rp1.200", tx:"Rp72", f:"Rp1.128"},
-    {n:"AGRISTICK SL400 12X1L", g:"B", r1:"12", r2:"1200", rw:"Rp1.800", tx:"Rp108", f:"Rp1.692"},
-    {n:"AMBITION 12X1L", g:"B", r1:"12", r2:"1200", rw:"Rp3.400", tx:"Rp204", f:"Rp3.196"},
-    {n:"AMBITION 20X500ML", g:"A", r1:"10", r2:"1000", rw:"Rp1.800", tx:"Rp108", f:"Rp1.692"},
-    {n:"ANTRACOL WP70 12X1KG", g:"C", r1:"12", r2:"1200", rw:"Rp2.100", tx:"Rp126", f:"Rp1.974"},
-    {n:"ANTRACOL WP70 20X500GR", g:"C", r1:"10", r2:"1000", rw:"Rp1.000", tx:"Rp60", f:"Rp940"},
-    {n:"ANTRACOL WP70 40X250GR", g:"C", r1:"10", r2:"1000", rw:"Rp500", tx:"Rp30", f:"Rp470"},
-    {n:"BAYCARB (NS) EC500 100X100ML", g:"B", r1:"10", r2:"1000", rw:"Rp200", tx:"Rp12", f:"Rp188"},
-    {n:"BAYCARB (NS) EC500 20X500ML", g:"B", r1:"10", r2:"1000", rw:"Rp900", tx:"Rp54", f:"Rp846"},
-    {n:"BAYFOLAN (C) 20X500ML", g:"B", r1:"10", r2:"1000", rw:"Rp400", tx:"Rp24", f:"Rp376"},
-    {n:"BAYFOLAN (C) 40X250ML", g:"B", r1:"10", r2:"1000", rw:"Rp200", tx:"Rp12", f:"Rp188"},
-    {n:"BELT EXPERT SC480 50X100ML", g:"B", r1:"90", r2:"9000", rw:"Rp2.100", tx:"Rp126", f:"Rp1.974"},
-    {n:"BELT EXPERT SC480 100X50ML", g:"B", r1:"90", r2:"9000", rw:"Rp1.000", tx:"Rp60", f:"Rp940"},
-    {n:"BELT EXPERT SC480 20X250ML", g:"B", r1:"90", r2:"9000", rw:"Rp5.100", tx:"Rp306", f:"Rp4.794"},
-    {n:"BELT EXPERT SC480 40X250ML", g:"B", r1:"180", r2:"18000", rw:"Rp5.100", tx:"Rp306", f:"Rp4.794"},
-    {n:"BULDOK (C) EC25 20X500ML", g:"B", r1:"30", r2:"3000", rw:"Rp2.400", tx:"Rp144", f:"Rp2.256"},
-    {n:"BULDOK (C) EC25 40X250ML", g:"B", r1:"30", r2:"3000", rw:"Rp1.200", tx:"Rp72", f:"Rp1.128"},
-    {n:"BULDOK EC25 100X100ML", g:"B", r1:"30", r2:"3000", rw:"Rp500", tx:"Rp30", f:"Rp470"},
-    {n:"CONFIDOR EXTRA SC350 50X100ML", g:"B", r1:"55", r2:"5500", rw:"Rp1.100", tx:"Rp66", f:"Rp1.034"},
-    {n:"CONFIDOR EXTRA SC350 100X50ML", g:"B", r1:"55", r2:"5500", rw:"Rp600", tx:"Rp36", f:"Rp564"},
-    {n:"CONFIDOR SL200 100X60ML", g:"B", r1:"66", r2:"6600", rw:"Rp700", tx:"Rp42", f:"Rp658"},
-    {n:"CONFIDOR WP5 100X100G", g:"B", r1:"30", r2:"3000", rw:"Rp300", tx:"Rp18", f:"Rp282"},
-    {n:"COUNCIL COMPLETE SC300 50X100ML", g:"A", r1:"90", r2:"9000", rw:"Rp4.000", tx:"Rp240", f:"Rp3.760"},
-    {n:"COUNCIL COMPLETE SC300 50X50ML", g:"A", r1:"45", r2:"4500", rw:"Rp1.300", tx:"Rp78", f:"Rp1.222"},
-    {n:"DECIS (NS) EC25 100X100ML", g:"A", r1:"30", r2:"3000", rw:"Rp600", tx:"Rp36", f:"Rp564"},
-    {n:"DECIS (NS) EC25 100X50ML", g:"A", r1:"15", r2:"1500", rw:"Rp300", tx:"Rp18", f:"Rp282"},
-    {n:"DECIS (NS) EC25 20X500ML", g:"A", r1:"30", r2:"3000", rw:"Rp2.900", tx:"Rp174", f:"Rp2.726"},
-    {n:"DECIS (NS) EC25 40X250ML", g:"A", r1:"30", r2:"3000", rw:"Rp1.500", tx:"Rp90", f:"Rp1.410"},
-    {n:"ETHREL PA10 4X5L", g:"B", r1:"20", r2:"2000", rw:"Rp7.900", tx:"Rp474", f:"Rp7.426"},
-    {n:"ETHREL SL480 100X100ML(C)", g:"B", r1:"40", r2:"4000", rw:"Rp500", tx:"Rp30", f:"Rp470"},
-    {n:"FOLICUR SC430 50X100ML(C)", g:"A", r1:"50", r2:"5000", rw:"Rp1.700", tx:"Rp102", f:"Rp1.598"},
-    {n:"FOLICUR SC430 100X60ML(C)", g:"A", r1:"60", r2:"6000", rw:"Rp1.000", tx:"Rp60", f:"Rp940"},
-    {n:"FOLICUR SC430 40X240ML(C)", g:"A", r1:"96", r2:"9600", rw:"Rp4.000", tx:"Rp240", f:"Rp3.760"},
-    {n:"FOLICUR WP25 100X50GR", g:"A", r1:"30", r2:"3000", rw:"Rp700", tx:"Rp42", f:"Rp658"},
-    {n:"FOLICUR WP25 40X250GR", g:"A", r1:"60", r2:"6000", rw:"Rp3.200", tx:"Rp192", f:"Rp3.008"},
-    {n:"GAUCHO FS350 100X20ML", g:"B", r1:"34", r2:"3400", rw:"Rp700", tx:"Rp42", f:"Rp658"},
-    {n:"GAUCHO FS350 50X50ML", g:"B", r1:"42.5", r2:"4250", rw:"Rp1.800", tx:"Rp108", f:"Rp1.692"},
-    {n:"IMMUNE START FS280 100X50ML", g:"B", r1:"40", r2:"4000", rw:"Rp500", tx:"Rp30", f:"Rp470"},
-    {n:"LARVIN WP75 100X100GR", g:"B", r1:"30", r2:"3000", rw:"Rp1.200", tx:"Rp72", f:"Rp1.128"},
-    {n:"LARVIN WP75 12X(50X15GR)", g:"-", r1:"27", r2:"2700", rw:"Rp0", tx:"Rp0", f:"Rp0"},
-    {n:"LESENTA WG80 100X100GR", g:"-", r1:"180", r2:"18000", rw:"Rp3.100", tx:"Rp186", f:"Rp2.914"},
-    {n:"LUNA SMART SC500 50X100ML", g:"B", r1:"90", r2:"9000", rw:"Rp3.100", tx:"Rp186", f:"Rp2.914"},
-    {n:"LUNA SMART SC500 100X50ML", g:"B", r1:"90", r2:"9000", rw:"Rp1.600", tx:"Rp96", f:"Rp1.504"},
-    {n:"MOVENTO ENERGY SC240 50X100ML", g:"B", r1:"65", r2:"6500", rw:"Rp2.400", tx:"Rp144", f:"Rp2.256"},
-    {n:"MOVENTO ENERGY SC240 100X50ML", g:"B", r1:"65", r2:"6500", rw:"Rp1.300", tx:"Rp78", f:"Rp1.222"},
-    {n:"NATIVO WG75 30X(10X12.5GR)", g:"A", r1:"52.5", r2:"5250", rw:"Rp350", tx:"Rp21", f:"Rp329"},
-    {n:"NATIVO WG75 50X(2X50GR)", g:"A", r1:"70", r2:"7000", rw:"Rp3.000", tx:"Rp180", f:"Rp2.820"},
-    {n:"OBERON SPEED 50X50ML", g:"A", r1:"27.5", r2:"2750", rw:"Rp2.000", tx:"Rp120", f:"Rp1.880"},
-    {n:"OBERON SPEED 50X100ML", g:"A", r1:"55", r2:"5500", rw:"Rp1.000", tx:"Rp60", f:"Rp940"},
-    {n:"PREVICUR N SL722 100X100ML(C)", g:"A", r1:"30", r2:"3000", rw:"Rp800", tx:"Rp48", f:"Rp752"},
-    {n:"PREVICUR N SL722 20X500ML(C)", g:"A", r1:"30", r2:"3000", rw:"Rp3.800", tx:"Rp228", f:"Rp3.572"},
-    {n:"RICESTAR EC69 100X100ML(C)", g:"B", r1:"20", r2:"2000", rw:"Rp700", tx:"Rp42", f:"Rp658"},
-    {n:"RICESTAR EC69 40X250ML(C)", g:"B", r1:"20", r2:"2000", rw:"Rp1.600", tx:"Rp96", f:"Rp1.504"},
-    {n:"RICESTAR XTRA (C) OD89 100X100ML", g:"A", r1:"70", r2:"7000", rw:"Rp1.000", tx:"Rp60", f:"Rp940"},
-    {n:"RICESTAR XTRA (C) OD89 40X250ML", g:"A", r1:"70", r2:"7000", rw:"Rp2.500", tx:"Rp150", f:"Rp2.350"},
-    {n:"RUMPAS (C) EW120 100X100ML", g:"B", r1:"40", r2:"4000", rw:"Rp700", tx:"Rp42", f:"Rp658"},
-    {n:"RUMPAS (C) EW120 40X250ML", g:"B", r1:"40", r2:"4000", rw:"Rp1.800", tx:"Rp108", f:"Rp1.692"},
-    {n:"SERENADE ASO SC 12X1L", g:"B", r1:"12", r2:"1200", rw:"Rp4.200", tx:"Rp252", f:"Rp3.948"},
-    {n:"SIVANTO PRIME SL200 50X100ML", g:"B", r1:"30", r2:"3000", rw:"Rp1.400", tx:"Rp84", f:"Rp1.316"},
-    {n:"SIVANTO PRIME SL200 100X50ML", g:"B", r1:"30", r2:"3000", rw:"Rp800", tx:"Rp48", f:"Rp752"},
-    {n:"TRIVIA WP73 100X50GR", g:"B", r1:"20", r2:"2000", rw:"Rp300", tx:"Rp18", f:"Rp282"},
-    {n:"TRIVIA WP73 50X200GR", g:"B", r1:"40", r2:"4000", rw:"Rp1.100", tx:"Rp66", f:"Rp1.034"},
-    {n:"VAYEGO SC200 100X50ML", g:"A", r1:"90", r2:"9000", rw:"Rp2.400", tx:"Rp144", f:"Rp2.256"},
-    {n:"VAYEGO (E) SC200 50X100ML", g:"A", r1:"90", r2:"9000", rw:"Rp4.600", tx:"Rp276", f:"Rp4.324"},
-    {n:"VELUM PRIME SC400 100X100ML", g:"B", r1:"180", r2:"18000", rw:"Rp3.500", tx:"Rp210", f:"Rp3.290"},
-    {n:"VELUM PRIME SC400 40X250ML", g:"B", r1:"180", r2:"18000", rw:"Rp8.400", tx:"Rp504", f:"Rp7.896"}
+    {n:"ADENGO (ICB) SC315 100X100ML", g:"-", r1:"180", r2:"18000", rw:"Rp2.500", tx:"Rp150", f:"Rp2.350", p:"BOT", c:"100 Pcs", s:"100 ML"},
+    {n:"ADENGO SC315 100X50ML", g:"-", r1:"90", r2:"9000", rw:"Rp1.200", tx:"Rp72", f:"Rp1.128", p:"BOT", c:"100 Pcs", s:"50 ML"},
+    {n:"AGRIDEX EC715 12X1L", g:"B", r1:"12", r2:"1200", rw:"Rp1.200", tx:"Rp72", f:"Rp1.128", p:"BOT", c:"12 Pcs", s:"1 L"},
+    {n:"AGRISTICK SL400 12X1L", g:"B", r1:"12", r2:"1200", rw:"Rp1.800", tx:"Rp108", f:"Rp1.692", p:"BOT", c:"12 Pcs", s:"1 L"},
+    {n:"AMBITION 12X1L", g:"B", r1:"12", r2:"1200", rw:"Rp3.400", tx:"Rp204", f:"Rp3.196", p:"BOT", c:"12 Pcs", s:"1 L"},
+    {n:"AMBITION 20X500ML", g:"A", r1:"10", r2:"1000", rw:"Rp1.800", tx:"Rp108", f:"Rp1.692", p:"BOT", c:"20 Pcs", s:"500 ML"},
+    {n:"ANTRACOL WP70 12X1KG", g:"C", r1:"12", r2:"1200", rw:"Rp2.100", tx:"Rp126", f:"Rp1.974", p:"BAG", c:"12 Pcs", s:"1 KG"},
+    {n:"ANTRACOL WP70 20X500GR", g:"C", r1:"10", r2:"1000", rw:"Rp1.000", tx:"Rp60", f:"Rp940", p:"BAG", c:"20 Pcs", s:"500 GR"},
+    {n:"ANTRACOL WP70 40X250GR", g:"C", r1:"10", r2:"1000", rw:"Rp500", tx:"Rp30", f:"Rp470", p:"BAG", c:"40 Pcs", s:"250 GR"},
+    {n:"BAYCARB (NS) EC500 100X100ML", g:"B", r1:"10", r2:"1000", rw:"Rp200", tx:"Rp12", f:"Rp188", p:"BOT", c:"100 Pcs", s:"100 ML"},
+    {n:"BAYCARB (NS) EC500 20X500ML", g:"B", r1:"10", r2:"1000", rw:"Rp900", tx:"Rp54", f:"Rp846", p:"BOT", c:"20 Pcs", s:"500 ML"},
+    {n:"BAYFOLAN (C) 20X500ML", g:"B", r1:"10", r2:"1000", rw:"Rp400", tx:"Rp24", f:"Rp376", p:"BOT", c:"20 Pcs", s:"500 ML"},
+    {n:"BAYFOLAN (C) 40X250ML", g:"B", r1:"10", r2:"1000", rw:"Rp200", tx:"Rp12", f:"Rp188", p:"BOT", c:"40 Pcs", s:"250 ML"},
+    {n:"BELT EXPERT SC480 50X100ML", g:"B", r1:"90", r2:"9000", rw:"Rp2.100", tx:"Rp126", f:"Rp1.974", p:"BOT", c:"50 Pcs", s:"100 ML"},
+    {n:"BELT EXPERT SC480 100X50ML", g:"B", r1:"90", r2:"9000", rw:"Rp1.000", tx:"Rp60", f:"Rp940", p:"BOT", c:"100 Pcs", s:"50 ML"},
+    {n:"BELT EXPERT SC480 20X250ML", g:"B", r1:"90", r2:"9000", rw:"Rp5.100", tx:"Rp306", f:"Rp4.794", p:"BOT", c:"20 Pcs", s:"250 ML"},
+    {n:"BELT EXPERT SC480 40X250ML", g:"B", r1:"180", r2:"18000", rw:"Rp5.100", tx:"Rp306", f:"Rp4.794", p:"BOT", c:"40 Pcs", s:"250 ML"},
+    {n:"BULDOK (C) EC25 20X500ML", g:"B", r1:"30", r2:"3000", rw:"Rp2.400", tx:"Rp144", f:"Rp2.256", p:"BOT", c:"20 Pcs", s:"500 ML"},
+    {n:"BULDOK (C) EC25 40X250ML", g:"B", r1:"30", r2:"3000", rw:"Rp1.200", tx:"Rp72", f:"Rp1.128", p:"BOT", c:"40 Pcs", s:"250 ML"},
+    {n:"BULDOK EC25 100X100ML", g:"B", r1:"30", r2:"3000", rw:"Rp500", tx:"Rp30", f:"Rp470", p:"BOT", c:"100 Pcs", s:"100 ML"},
+    {n:"CONFIDOR EXTRA SC350 50X100ML", g:"B", r1:"55", r2:"5500", rw:"Rp1.100", tx:"Rp66", f:"Rp1.034", p:"BOT", c:"50 Pcs", s:"100 ML"},
+    {n:"CONFIDOR EXTRA SC350 100X50ML", g:"B", r1:"55", r2:"5500", rw:"Rp600", tx:"Rp36", f:"Rp564", p:"BOT", c:"100 Pcs", s:"50 ML"},
+    {n:"CONFIDOR SL200 100X60ML", g:"B", r1:"66", r2:"6600", rw:"Rp700", tx:"Rp42", f:"Rp658", p:"BOT", c:"100 Pcs", s:"60 ML"},
+    {n:"CONFIDOR WP5 100X100G", g:"B", r1:"30", r2:"3000", rw:"Rp300", tx:"Rp18", f:"Rp282", p:"BAG", c:"100 Pcs", s:"100 GR"},
+    {n:"COUNCIL COMPLETE SC300 50X100ML", g:"A", r1:"90", r2:"9000", rw:"Rp4.000", tx:"Rp240", f:"Rp3.760", p:"BOT", c:"50 Pcs", s:"100 ML"},
+    {n:"COUNCIL COMPLETE SC300 50X50ML", g:"A", r1:"45", r2:"4500", rw:"Rp1.300", tx:"Rp78", f:"Rp1.222", p:"BOT", c:"50 Pcs", s:"50 ML"},
+    {n:"DECIS (NS) EC25 100X100ML", g:"A", r1:"30", r2:"3000", rw:"Rp600", tx:"Rp36", f:"Rp564", p:"BOT", c:"100 Pcs", s:"100 ML"},
+    {n:"DECIS (NS) EC25 100X50ML", g:"A", r1:"15", r2:"1500", rw:"Rp300", tx:"Rp18", f:"Rp282", p:"BOT", c:"100 Pcs", s:"50 ML"},
+    {n:"DECIS (NS) EC25 20X500ML", g:"A", r1:"30", r2:"3000", rw:"Rp2.900", tx:"Rp174", f:"Rp2.726", p:"BOT", c:"20 Pcs", s:"500 ML"},
+    {n:"DECIS (NS) EC25 40X250ML", g:"A", r1:"30", r2:"3000", rw:"Rp1.500", tx:"Rp90", f:"Rp1.410", p:"BOT", c:"40 Pcs", s:"250 ML"},
+    {n:"ETHREL PA10 4X5L", g:"B", r1:"20", r2:"2000", rw:"Rp7.900", tx:"Rp474", f:"Rp7.426", p:"BOT", c:"4 Pcs", s:"5 L"},
+    {n:"ETHREL SL480 100X100ML(C)", g:"B", r1:"40", r2:"4000", rw:"Rp500", tx:"Rp30", f:"Rp470", p:"BOT", c:"100 Pcs", s:"100 ML"},
+    {n:"FOLICUR SC430 50X100ML(C)", g:"A", r1:"50", r2:"5000", rw:"Rp1.700", tx:"Rp102", f:"Rp1.598", p:"BOT", c:"50 Pcs", s:"100 ML"},
+    {n:"FOLICUR SC430 100X60ML(C)", g:"A", r1:"60", r2:"6000", rw:"Rp1.000", tx:"Rp60", f:"Rp940", p:"BOT", c:"100 Pcs", s:"60 ML"},
+    {n:"FOLICUR SC430 40X240ML(C)", g:"A", r1:"96", r2:"9600", rw:"Rp4.000", tx:"Rp240", f:"Rp3.760", p:"BOT", c:"40 Pcs", s:"240 ML"},
+    {n:"FOLICUR WP25 100X50GR", g:"A", r1:"30", r2:"3000", rw:"Rp700", tx:"Rp42", f:"Rp658", p:"BAG", c:"100 Pcs", s:"50 GR"},
+    {n:"FOLICUR WP25 40X250GR", g:"A", r1:"60", r2:"6000", rw:"Rp3.200", tx:"Rp192", f:"Rp3.008", p:"BAG", c:"40 Pcs", s:"250 GR"},
+    {n:"GAUCHO FS350 100X20ML", g:"B", r1:"34", r2:"3400", rw:"Rp700", tx:"Rp42", f:"Rp658", p:"BOT", c:"100 Pcs", s:"20 ML"},
+    {n:"GAUCHO FS350 50X50ML", g:"B", r1:"42.5", r2:"4250", rw:"Rp1.800", tx:"Rp108", f:"Rp1.692", p:"BOT", c:"50 Pcs", s:"50 ML"},
+    {n:"IMMUNE START FS280 100X50ML", g:"B", r1:"40", r2:"4000", rw:"Rp500", tx:"Rp30", f:"Rp470", p:"BOT", c:"100 Pcs", s:"50 ML"},
+    {n:"LARVIN WP75 100X100GR", g:"B", r1:"30", r2:"3000", rw:"Rp1.200", tx:"Rp72", f:"Rp1.128", p:"BAG", c:"100 Pcs", s:"100 GR"},
+    {n:"LESENTA WG80 100X100GR", g:"-", r1:"180", r2:"18000", rw:"Rp3.100", tx:"Rp186", f:"Rp2.914", p:"BAG", c:"100 Pcs", s:"100 GR"},
+    {n:"LUNA SMART SC500 50X100ML", g:"B", r1:"90", r2:"9000", rw:"Rp3.100", tx:"Rp186", f:"Rp2.914", p:"BOT", c:"50 Pcs", s:"100 ML"},
+    {n:"LUNA SMART SC500 100X50ML", g:"B", r1:"90", r2:"9000", rw:"Rp1.600", tx:"Rp96", f:"Rp1.504", p:"BOT", c:"100 Pcs", s:"50 ML"},
+    {n:"MOVENTO ENERGY SC240 50X100ML", g:"B", r1:"65", r2:"6500", rw:"Rp2.400", tx:"Rp144", f:"Rp2.256", p:"BOT", c:"50 Pcs", s:"100 ML"},
+    {n:"MOVENTO ENERGY SC240 100X50ML", g:"B", r1:"65", r2:"6500", rw:"Rp1.300", tx:"Rp78", f:"Rp1.222", p:"BOT", c:"100 Pcs", s:"50 ML"},
+    {n:"NATIVO WG75 30X(10X12.5GR)", g:"A", r1:"52.5", r2:"5250", rw:"Rp350", tx:"Rp21", f:"Rp329", p:"BAG", c:"30 Pcs", s:"12.5 GR"},
+    {n:"NATIVO WG75 50X(2X50GR)", g:"A", r1:"70", r2:"7000", rw:"Rp3.000", tx:"Rp180", f:"Rp2.820", p:"BAG", c:"50 Pcs", s:"50 GR"},
+    {n:"OBERON SPEED 50X50ML", g:"A", r1:"27.5", r2:"2750", rw:"Rp2.000", tx:"Rp120", f:"Rp1.880", p:"BOT", c:"50 Pcs", s:"50 ML"},
+    {n:"OBERON SPEED 50X100ML", g:"A", r1:"55", r2:"5500", rw:"Rp1.000", tx:"Rp60", f:"Rp940", p:"BOT", c:"50 Pcs", s:"100 ML"},
+    {n:"PREVICUR N SL722 100X100ML(C)", g:"A", r1:"30", r2:"3000", rw:"Rp800", tx:"Rp48", f:"Rp752", p:"BOT", c:"100 Pcs", s:"100 ML"},
+    {n:"PREVICUR N SL722 20X500ML(C)", g:"A", r1:"30", r2:"3000", rw:"Rp3.800", tx:"Rp228", f:"Rp3.572", p:"BOT", c:"20 Pcs", s:"500 ML"},
+    {n:"RICESTAR EC69 100X100ML(C)", g:"B", r1:"20", r2:"2000", rw:"Rp700", tx:"Rp42", f:"Rp658", p:"BOT", c:"100 Pcs", s:"100 ML"},
+    {n:"RICESTAR EC69 40X250ML(C)", g:"B", r1:"20", r2:"2000", rw:"Rp1.600", tx:"Rp96", f:"Rp1.504", p:"BOT", c:"40 Pcs", s:"250 ML"},
+    {n:"RICESTAR XTRA (C) OD89 100X100ML", g:"A", r1:"70", r2:"7000", rw:"Rp1.000", tx:"Rp60", f:"Rp940", p:"BOT", c:"100 Pcs", s:"100 ML"},
+    {n:"RICESTAR XTRA (C) OD89 40X250ML", g:"A", r1:"70", r2:"7000", rw:"Rp2.500", tx:"Rp150", f:"Rp2.350", p:"BOT", c:"40 Pcs", s:"250 ML"},
+    {n:"RUMPAS (C) EW120 100X100ML", g:"B", r1:"40", r2:"4000", rw:"Rp700", tx:"Rp42", f:"Rp658", p:"BOT", c:"100 Pcs", s:"100 ML"},
+    {n:"RUMPAS (C) EW120 40X250ML", g:"B", r1:"40", r2:"4000", rw:"Rp1.800", tx:"Rp108", f:"Rp1.692", p:"BOT", c:"40 Pcs", s:"250 ML"},
+    {n:"SERENADE ASO SC 12X1L", g:"B", r1:"12", r2:"1200", rw:"Rp4.200", tx:"Rp252", f:"Rp3.948", p:"BOT", c:"12 Pcs", s:"1 L"},
+    {n:"SIVANTO PRIME SL200 50X100ML", g:"B", r1:"30", r2:"3000", rw:"Rp1.400", tx:"Rp84", f:"Rp1.316", p:"BOT", c:"50 Pcs", s:"100 ML"},
+    {n:"SIVANTO PRIME SL200 100X50ML", g:"B", r1:"30", r2:"3000", rw:"Rp800", tx:"Rp48", f:"Rp752", p:"BOT", c:"100 Pcs", s:"50 ML"},
+    {n:"TRIVIA WP73 100X50GR", g:"B", r1:"20", r2:"2000", rw:"Rp300", tx:"Rp18", f:"Rp282", p:"BAG", c:"100 Pcs", s:"50 GR"},
+    {n:"TRIVIA WP73 50X200GR", g:"B", r1:"40", r2:"4000", rw:"Rp1.100", tx:"Rp66", f:"Rp1.034", p:"BAG", c:"50 Pcs", s:"200 GR"},
+    {n:"VAYEGO SC200 100X50ML", g:"A", r1:"90", r2:"9000", rw:"Rp2.400", tx:"Rp144", f:"Rp2.256", p:"BOT", c:"100 Pcs", s:"50 ML"},
+    {n:"VAYEGO (E) SC200 50X100ML", g:"A", r1:"90", r2:"9000", rw:"Rp4.600", tx:"Rp276", f:"Rp4.324", p:"BOT", c:"50 Pcs", s:"100 ML"},
+    {n:"VELUM PRIME SC400 100X100ML", g:"B", r1:"180", r2:"18000", rw:"Rp3.500", tx:"Rp210", f:"Rp3.290", p:"BOT", c:"100 Pcs", s:"100 ML"},
+    {n:"VELUM PRIME SC400 40X250ML", g:"B", r1:"180", r2:"18000", rw:"Rp8.400", tx:"Rp504", f:"Rp7.896", p:"BOT", c:"40 Pcs", s:"250 ML"}
 ];
 
 const picker = document.getElementById('prodPicker');
 const view = document.getElementById('display-info');
 
-// Urutkan alfabetis & masukkan ke dropdown
 dataset.sort((a,b) => a.n.localeCompare(b.n)).forEach((item, i) => {
     let opt = document.createElement('option');
     opt.value = i;
@@ -206,6 +212,9 @@ function updateView() {
     const d = dataset[idx];
     view.style.display = 'block';
     document.getElementById('v-group').innerText = "GROUP " + d.g;
+    document.getElementById('v-pack').innerText = d.p + " (PCS)";
+    document.getElementById('v-size').innerText = d.s;
+    document.getElementById('v-pcs').innerText = d.c;
     document.getElementById('v-r1').innerText = d.r1;
     document.getElementById('v-r2').innerText = d.r2;
     document.getElementById('v-reward').innerText = d.rw;
