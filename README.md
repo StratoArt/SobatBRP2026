@@ -1,0 +1,1 @@
+copyright by amrizal ivan
