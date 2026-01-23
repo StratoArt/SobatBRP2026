@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Katalog Reward Sobat Bayer 2026</title>
+    <style>
+        :root {
+            --primary: #0089ff;
+            --bg: #f0f2f5;
+            --card: #ffffff;
+            --text: #333;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg);
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .main-card {
+            width: 100%;
+            max-width: 500px;
+            background: var(--card);
+            border-radius: 15px;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.1);
+            padding: 20px;
+        }
+
+        .header { text-align: center; border-bottom: 2px solid #eee; margin-bottom: 20px; padding-bottom: 10px; }
+        .header h2 { margin: 0; color: var(--primary); font-size: 1.3rem; }
+
+        label { display: block; font-size: 0.85rem; font-weight: bold; margin-bottom: 10px; color: #666; }
+
+        select {
+            width: 100%;
+            padding: 12px;
+            border-radius: 10px;
+            border: 2px solid #ddd;
+            font-size: 1rem;
+            outline: none;
+            background: #fff;
+        }
+
+        #display-info {
+            display: none;
+            margin-top: 25px;
+            animation: slideDown 0.3s ease;
+        }
+
+        @keyframes slideDown { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
+
+        .data-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .data-label { color: #888; font-size: 0.9rem; }
+        .data-value { font-weight: 600; color: var(--text); }
+
+        .final-reward-box {
+            background: linear-gradient(135deg, #0089ff, #0056b3);
+            color: white;
+            padding: 20px;
+            border-radius: 12px;
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .final-reward-box small { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; }
+        .final-reward-box div { font-size: 1.8rem; font-weight: 800; margin-top: 5px; }
+
+        .group-badge {
+            display: inline-block;
+            background: #e1f5fe;
+            color: #01579b;
+            padding: 2px 10px;
+            border-radius: 5px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="main-card">
+    <div class="header">
+        <h2>Reward Sobat 2026</h2>
+    </div>
+
+    <label>PILIH ITEM PRODUK:</label>
+    <select id="prodPicker" onchange="updateView()">
+        <option value="">-- Lihat Daftar Produk --</option>
+    </select>
+
+    <div id="display-info">
+        <div id="v-group" class="group-badge">GROUP -</div>
+        <div class="data-row"><span class="data-label">Point R1</span><span id="v-r1" class="data-value">-</span></div>
+        <div class="data-row"><span class="data-label">Point R2</span><span id="v-r2" class="data-value">-</span></div>
+        <div class="data-row"><span class="data-label">Reward Sobat</span><span id="v-reward" class="data-value">-</span></div>
+        <div class="data-row"><span class="data-label">Pajak Sobat (6%)</span><span id="v-tax" class="data-value">-</span></div>
+        
+        <div class="final-reward-box">
+            <small>Final Reward Sobat</small>
+            <div id="v-final">-</div>
+        </div>
+    </div>
+</div>
+
+<script>
+const dataset = [
+    {n:"ADENGO (ICB) SC315 100X100ML", g:"-", r1:"180", r2:"18000", rw:"Rp2.500", tx:"Rp150", f:"Rp2.350"},
+    {n:"ADENGO SC315 100X50ML", g:"-", r1:"90", r2:"9000", rw:"Rp1.200", tx:"Rp72", f:"Rp1.128"},
+    {n:"AGRIDEX EC715 12X1L", g:"B", r1:"12", r2:"1200", rw:"Rp1.200", tx:"Rp72", f:"Rp1.128"},
+    {n:"AGRISTICK SL400 12X1L", g:"B", r1:"12", r2:"1200", rw:"Rp1.800", tx:"Rp108", f:"Rp1.692"},
+    {n:"AMBITION 12X1L", g:"B", r1:"12", r2:"1200", rw:"Rp3.400", tx:"Rp204", f:"Rp3.196"},
+    {n:"AMBITION 20X500ML", g:"A", r1:"10", r2:"1000", rw:"Rp1.800", tx:"Rp108", f:"Rp1.692"},
+    {n:"ANTRACOL WP70 12X1KG", g:"C", r1:"12", r2:"1200", rw:"Rp2.100", tx:"Rp126", f:"Rp1.974"},
+    {n:"ANTRACOL WP70 20X500GR", g:"C", r1:"10", r2:"1000", rw:"Rp1.000", tx:"Rp60", f:"Rp940"},
+    {n:"ANTRACOL WP70 40X250GR", g:"C", r1:"10", r2:"1000", rw:"Rp500", tx:"Rp30", f:"Rp470"},
+    {n:"BAYCARB (NS) EC500 100X100ML", g:"B", r1:"10", r2:"1000", rw:"Rp200", tx:"Rp12", f:"Rp188"},
+    {n:"BAYCARB (NS) EC500 20X500ML", g:"B", r1:"10", r2:"1000", rw:"Rp900", tx:"Rp54", f:"Rp846"},
+    {n:"BAYFOLAN (C) 20X500ML", g:"B", r1:"10", r2:"1000", rw:"Rp400", tx:"Rp24", f:"Rp376"},
+    {n:"BAYFOLAN (C) 40X250ML", g:"B", r1:"10", r2:"1000", rw:"Rp200", tx:"Rp12", f:"Rp188"},
+    {n:"BELT EXPERT SC480 50X100ML", g:"B", r1:"90", r2:"9000", rw:"Rp2.100", tx:"Rp126", f:"Rp1.974"},
+    {n:"BELT EXPERT SC480 100X50ML", g:"B", r1:"90", r2:"9000", rw:"Rp1.000", tx:"Rp60", f:"Rp940"},
+    {n:"BELT EXPERT SC480 20X250ML", g:"B", r1:"90", r2:"9000", rw:"Rp5.100", tx:"Rp306", f:"Rp4.794"},
+    {n:"BELT EXPERT SC480 40X250ML", g:"B", r1:"180", r2:"18000", rw:"Rp5.100", tx:"Rp306", f:"Rp4.794"},
+    {n:"BULDOK (C) EC25 20X500ML", g:"B", r1:"30", r2:"3000", rw:"Rp2.400", tx:"Rp144", f:"Rp2.256"},
+    {n:"BULDOK (C) EC25 40X250ML", g:"B", r1:"30", r2:"3000", rw:"Rp1.200", tx:"Rp72", f:"Rp1.128"},
+    {n:"BULDOK EC25 100X100ML", g:"B", r1:"30", r2:"3000", rw:"Rp500", tx:"Rp30", f:"Rp470"},
+    {n:"CONFIDOR EXTRA SC350 50X100ML", g:"B", r1:"55", r2:"5500", rw:"Rp1.100", tx:"Rp66", f:"Rp1.034"},
+    {n:"CONFIDOR EXTRA SC350 100X50ML", g:"B", r1:"55", r2:"5500", rw:"Rp600", tx:"Rp36", f:"Rp564"},
+    {n:"CONFIDOR SL200 100X60ML", g:"B", r1:"66", r2:"6600", rw:"Rp700", tx:"Rp42", f:"Rp658"},
+    {n:"CONFIDOR WP5 100X100G", g:"B", r1:"30", r2:"3000", rw:"Rp300", tx:"Rp18", f:"Rp282"},
+    {n:"COUNCIL COMPLETE SC300 50X100ML", g:"A", r1:"90", r2:"9000", rw:"Rp4.000", tx:"Rp240", f:"Rp3.760"},
+    {n:"COUNCIL COMPLETE SC300 50X50ML", g:"A", r1:"45", r2:"4500", rw:"Rp1.300", tx:"Rp78", f:"Rp1.222"},
+    {n:"DECIS (NS) EC25 100X100ML", g:"A", r1:"30", r2:"3000", rw:"Rp600", tx:"Rp36", f:"Rp564"},
+    {n:"DECIS (NS) EC25 100X50ML", g:"A", r1:"15", r2:"1500", rw:"Rp300", tx:"Rp18", f:"Rp282"},
+    {n:"DECIS (NS) EC25 20X500ML", g:"A", r1:"30", r2:"3000", rw:"Rp2.900", tx:"Rp174", f:"Rp2.726"},
+    {n:"DECIS (NS) EC25 40X250ML", g:"A", r1:"30", r2:"3000", rw:"Rp1.500", tx:"Rp90", f:"Rp1.410"},
+    {n:"ETHREL PA10 4X5L", g:"B", r1:"20", r2:"2000", rw:"Rp7.900", tx:"Rp474", f:"Rp7.426"},
+    {n:"ETHREL SL480 100X100ML(C)", g:"B", r1:"40", r2:"4000", rw:"Rp500", tx:"Rp30", f:"Rp470"},
+    {n:"FOLICUR SC430 50X100ML(C)", g:"A", r1:"50", r2:"5000", rw:"Rp1.700", tx:"Rp102", f:"Rp1.598"},
+    {n:"FOLICUR SC430 100X60ML(C)", g:"A", r1:"60", r2:"6000", rw:"Rp1.000", tx:"Rp60", f:"Rp940"},
+    {n:"FOLICUR SC430 40X240ML(C)", g:"A", r1:"96", r2:"9600", rw:"Rp4.000", tx:"Rp240", f:"Rp3.760"},
+    {n:"FOLICUR WP25 100X50GR", g:"A", r1:"30", r2:"3000", rw:"Rp700", tx:"Rp42", f:"Rp658"},
+    {n:"FOLICUR WP25 40X250GR", g:"A", r1:"60", r2:"6000", rw:"Rp3.200", tx:"Rp192", f:"Rp3.008"},
+    {n:"GAUCHO FS350 100X20ML", g:"B", r1:"34", r2:"3400", rw:"Rp700", tx:"Rp42", f:"Rp658"},
+    {n:"GAUCHO FS350 50X50ML", g:"B", r1:"42.5", r2:"4250", rw:"Rp1.800", tx:"Rp108", f:"Rp1.692"},
+    {n:"IMMUNE START FS280 100X50ML", g:"B", r1:"40", r2:"4000", rw:"Rp500", tx:"Rp30", f:"Rp470"},
+    {n:"LARVIN WP75 100X100GR", g:"B", r1:"30", r2:"3000", rw:"Rp1.200", tx:"Rp72", f:"Rp1.128"},
+    {n:"LARVIN WP75 12X(50X15GR)", g:"-", r1:"27", r2:"2700", rw:"Rp0", tx:"Rp0", f:"Rp0"},
+    {n:"LESENTA WG80 100X100GR", g:"-", r1:"180", r2:"18000", rw:"Rp3.100", tx:"Rp186", f:"Rp2.914"},
+    {n:"LUNA SMART SC500 50X100ML", g:"B", r1:"90", r2:"9000", rw:"Rp3.100", tx:"Rp186", f:"Rp2.914"},
+    {n:"LUNA SMART SC500 100X50ML", g:"B", r1:"90", r2:"9000", rw:"Rp1.600", tx:"Rp96", f:"Rp1.504"},
+    {n:"MOVENTO ENERGY SC240 50X100ML", g:"B", r1:"65", r2:"6500", rw:"Rp2.400", tx:"Rp144", f:"Rp2.256"},
+    {n:"MOVENTO ENERGY SC240 100X50ML", g:"B", r1:"65", r2:"6500", rw:"Rp1.300", tx:"Rp78", f:"Rp1.222"},
+    {n:"NATIVO WG75 30X(10X12.5GR)", g:"A", r1:"52.5", r2:"5250", rw:"Rp350", tx:"Rp21", f:"Rp329"},
+    {n:"NATIVO WG75 50X(2X50GR)", g:"A", r1:"70", r2:"7000", rw:"Rp3.000", tx:"Rp180", f:"Rp2.820"},
+    {n:"OBERON SPEED 50X50ML", g:"A", r1:"27.5", r2:"2750", rw:"Rp2.000", tx:"Rp120", f:"Rp1.880"},
+    {n:"OBERON SPEED 50X100ML", g:"A", r1:"55", r2:"5500", rw:"Rp1.000", tx:"Rp60", f:"Rp940"},
+    {n:"PREVICUR N SL722 100X100ML(C)", g:"A", r1:"30", r2:"3000", rw:"Rp800", tx:"Rp48", f:"Rp752"},
+    {n:"PREVICUR N SL722 20X500ML(C)", g:"A", r1:"30", r2:"3000", rw:"Rp3.800", tx:"Rp228", f:"Rp3.572"},
+    {n:"RICESTAR EC69 100X100ML(C)", g:"B", r1:"20", r2:"2000", rw:"Rp700", tx:"Rp42", f:"Rp658"},
+    {n:"RICESTAR EC69 40X250ML(C)", g:"B", r1:"20", r2:"2000", rw:"Rp1.600", tx:"Rp96", f:"Rp1.504"},
+    {n:"RICESTAR XTRA (C) OD89 100X100ML", g:"A", r1:"70", r2:"7000", rw:"Rp1.000", tx:"Rp60", f:"Rp940"},
+    {n:"RICESTAR XTRA (C) OD89 40X250ML", g:"A", r1:"70", r2:"7000", rw:"Rp2.500", tx:"Rp150", f:"Rp2.350"},
+    {n:"RUMPAS (C) EW120 100X100ML", g:"B", r1:"40", r2:"4000", rw:"Rp700", tx:"Rp42", f:"Rp658"},
+    {n:"RUMPAS (C) EW120 40X250ML", g:"B", r1:"40", r2:"4000", rw:"Rp1.800", tx:"Rp108", f:"Rp1.692"},
+    {n:"SERENADE ASO SC 12X1L", g:"B", r1:"12", r2:"1200", rw:"Rp4.200", tx:"Rp252", f:"Rp3.948"},
+    {n:"SIVANTO PRIME SL200 50X100ML", g:"B", r1:"30", r2:"3000", rw:"Rp1.400", tx:"Rp84", f:"Rp1.316"},
+    {n:"SIVANTO PRIME SL200 100X50ML", g:"B", r1:"30", r2:"3000", rw:"Rp800", tx:"Rp48", f:"Rp752"},
+    {n:"TRIVIA WP73 100X50GR", g:"B", r1:"20", r2:"2000", rw:"Rp300", tx:"Rp18", f:"Rp282"},
+    {n:"TRIVIA WP73 50X200GR", g:"B", r1:"40", r2:"4000", rw:"Rp1.100", tx:"Rp66", f:"Rp1.034"},
+    {n:"VAYEGO SC200 100X50ML", g:"A", r1:"90", r2:"9000", rw:"Rp2.400", tx:"Rp144", f:"Rp2.256"},
+    {n:"VAYEGO (E) SC200 50X100ML", g:"A", r1:"90", r2:"9000", rw:"Rp4.600", tx:"Rp276", f:"Rp4.324"},
+    {n:"VELUM PRIME SC400 100X100ML", g:"B", r1:"180", r2:"18000", rw:"Rp3.500", tx:"Rp210", f:"Rp3.290"},
+    {n:"VELUM PRIME SC400 40X250ML", g:"B", r1:"180", r2:"18000", rw:"Rp8.400", tx:"Rp504", f:"Rp7.896"}
+];
+
+const picker = document.getElementById('prodPicker');
+const view = document.getElementById('display-info');
+
+// Urutkan alfabetis & masukkan ke dropdown
+dataset.sort((a,b) => a.n.localeCompare(b.n)).forEach((item, i) => {
+    let opt = document.createElement('option');
+    opt.value = i;
+    opt.innerText = item.n;
+    picker.appendChild(opt);
+});
+
+function updateView() {
+    const idx = picker.value;
+    if(idx === "") {
+        view.style.display = 'none';
+        return;
+    }
+
+    const d = dataset[idx];
+    view.style.display = 'block';
+    document.getElementById('v-group').innerText = "GROUP " + d.g;
+    document.getElementById('v-r1').innerText = d.r1;
+    document.getElementById('v-r2').innerText = d.r2;
+    document.getElementById('v-reward').innerText = d.rw;
+    document.getElementById('v-tax').innerText = d.tx;
+    document.getElementById('v-final').innerText = d.f;
+}
+</script>
+
+</body>
+</html>
