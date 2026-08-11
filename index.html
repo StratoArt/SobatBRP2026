@@ -1,140 +1,429 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Katalog Reward Sobat Bayer 2026</title>
-    <style>
-        :root {
-            --primary: #0089ff;
-            --bg: #f0f2f5;
-            --card: #ffffff;
-            --text: #333;
-            --accent: #e65100;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Katalog Reward Sobat Bayer 2026</title>
 
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: var(--bg);
-            margin: 0;
-            padding: 20px;
-            display: flex;
-            justify-content: center;
-            flex-direction: column;
-            align-items: center;
-        }
+<style>
+:root {
+    --bayer-blue:#003b7a;
+    --bayer-blue-2:#005eb8;
+    --bayer-green:#76bc21;
+    --bayer-light:#eef7fb;
+    --bayer-border:#d8e6ee;
+    --bayer-text:#1f2937;
+    --bayer-muted:#71879a;
+}
 
-        .main-card {
-            width: 100%;
-            max-width: 500px;
-            background: var(--card);
-            border-radius: 15px;
-            box-shadow: 0 8px 30px rgba(0,0,0,0.1);
-            padding: 20px;
-            box-sizing: border-box;
-        }
+* { box-sizing:border-box; }
 
-        .header { text-align: center; border-bottom: 2px solid #eee; margin-bottom: 20px; padding-bottom: 10px; }
-        .header h2 { margin: 0; color: var(--primary); font-size: 1.3rem; }
+body {
+    margin:0;
+    min-height:100vh;
+    padding:20px 12px 30px;
+    font-family:Arial, Helvetica, sans-serif;
+    background:#f3f7f9;
+    color:var(--bayer-text);
+}
 
-        label { display: block; font-size: 0.85rem; font-weight: bold; margin-bottom: 10px; color: #666; }
+.page {
+    width:100%;
+    max-width:620px;
+    margin:auto;
+}
 
-        select {
-            width: 100%;
-            padding: 12px;
-            border-radius: 10px;
-            border: 2px solid #ddd;
-            font-size: 1rem;
-            outline: none;
-            background: #fff;
-        }
+.main-card {
+    background:#fff;
+    border-radius:20px;
+    overflow:hidden;
+    box-shadow:0 10px 35px rgba(0,45,92,.12);
+    border:1px solid #e3edf2;
+}
 
-        #display-info {
-            display: none;
-            margin-top: 25px;
-            animation: slideDown 0.3s ease;
-        }
+.hero {
+    position:relative;
+    overflow:hidden;
+    padding:24px 22px 26px;
+    color:#fff;
+    background:linear-gradient(135deg,var(--bayer-blue),var(--bayer-blue-2));
+}
 
-        @keyframes slideDown { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
+.hero::after {
+    content:"";
+    position:absolute;
+    right:-75px;
+    top:-90px;
+    width:230px;
+    height:230px;
+    border:34px solid rgba(118,188,33,.28);
+    border-radius:50%;
+}
 
-        .data-row {
-            display: flex;
-            justify-content: space-between;
-            padding: 10px 0;
-            border-bottom: 1px solid #f0f0f0;
-        }
+.hero::before {
+    content:"";
+    position:absolute;
+    right:65px;
+    bottom:-90px;
+    width:150px;
+    height:150px;
+    border:22px solid rgba(255,255,255,.07);
+    border-radius:50%;
+}
 
-        .data-label { color: #888; font-size: 0.9rem; }
-        .data-value { font-weight: 600; color: var(--text); }
+.hero-content {
+    position:relative;
+    z-index:2;
+}
 
-        .final-reward-box {
-            background: linear-gradient(135deg, #0089ff, #0056b3);
-            color: white;
-            padding: 20px;
-            border-radius: 12px;
-            text-align: center;
-            margin-top: 20px;
-        }
+.brand {
+    font-size:10px;
+    font-weight:900;
+    letter-spacing:.18em;
+    text-transform:uppercase;
+    opacity:.9;
+}
 
-        .final-reward-box small { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; }
-        .final-reward-box div { font-size: 1.8rem; font-weight: 800; margin-top: 5px; }
+.hero h1 {
+    margin:5px 0 3px;
+    font-size:25px;
+    line-height:1.1;
+    font-weight:900;
+}
 
-        .badges { margin-bottom: 10px; }
-        .badge {
-            display: inline-block;
-            padding: 2px 10px;
-            border-radius: 5px;
-            font-size: 0.8rem;
-            font-weight: bold;
-            margin-right: 5px;
-        }
-        .bg-blue { background: #e1f5fe; color: #01579b; }
-        .bg-orange { background: #fff3e0; color: var(--accent); }
+.hero p {
+    margin:0;
+    font-size:10px;
+    font-weight:700;
+    opacity:.78;
+}
 
-        .copyright {
-            margin-top: 25px;
-            text-align: center;
-            font-size: 0.75rem;
-            color: #999;
-            line-height: 1.6;
-        }
-    </style>
+.green-line {
+    height:5px;
+    background:var(--bayer-green);
+}
+
+.content {
+    padding:20px;
+}
+
+.section-label {
+    display:block;
+    margin-bottom:7px;
+    color:var(--bayer-muted);
+    font-size:9px;
+    font-weight:900;
+    letter-spacing:.08em;
+    text-transform:uppercase;
+}
+
+.select-wrap {
+    position:relative;
+}
+
+select {
+    width:100%;
+    padding:14px 42px 14px 14px;
+    border:1px solid var(--bayer-border);
+    border-radius:12px;
+    outline:none;
+    background:#fff;
+    color:#263746;
+    font-size:13px;
+    font-weight:700;
+    appearance:none;
+    cursor:pointer;
+    transition:.2s;
+}
+
+select:focus {
+    border-color:#74a9cf;
+    box-shadow:0 0 0 4px rgba(0,94,184,.08);
+}
+
+.select-wrap::after {
+    content:"⌄";
+    position:absolute;
+    right:15px;
+    top:50%;
+    transform:translateY(-55%);
+    color:var(--bayer-blue);
+    font-size:18px;
+    font-weight:900;
+    pointer-events:none;
+}
+
+.info-card {
+    display:none;
+    margin-top:18px;
+    animation:slideDown .25s ease;
+}
+
+@keyframes slideDown {
+    from { opacity:0; transform:translateY(-8px); }
+    to { opacity:1; transform:translateY(0); }
+}
+
+.product-head {
+    padding:14px;
+    border-radius:14px 14px 0 0;
+    background:var(--bayer-light);
+    border:1px solid var(--bayer-border);
+    border-bottom:0;
+}
+
+.product-name {
+    font-size:12px;
+    line-height:1.35;
+    font-weight:900;
+    color:var(--bayer-blue);
+}
+
+.badges {
+    display:flex;
+    gap:6px;
+    flex-wrap:wrap;
+    margin-top:9px;
+}
+
+.badge {
+    display:inline-flex;
+    align-items:center;
+    padding:4px 9px;
+    border-radius:999px;
+    font-size:8px;
+    font-weight:900;
+    letter-spacing:.03em;
+}
+
+.bg-blue {
+    background:#dfeef9;
+    color:#005eb8;
+}
+
+.bg-green {
+    background:#eaf6df;
+    color:#4f8d12;
+}
+
+.bg-gold {
+    background:#fff4d8;
+    color:#9a6700;
+}
+
+.data-card {
+    padding:8px 14px 4px;
+    border:1px solid var(--bayer-border);
+    border-radius:0 0 14px 14px;
+    background:#fff;
+}
+
+.data-row {
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:15px;
+    padding:11px 0;
+    border-bottom:1px solid #edf2f5;
+}
+
+.data-row:last-child {
+    border-bottom:0;
+}
+
+.data-label {
+    color:var(--bayer-muted);
+    font-size:10px;
+    font-weight:700;
+}
+
+.data-value {
+    text-align:right;
+    color:#253746;
+    font-size:11px;
+    font-weight:900;
+}
+
+.reward-highlight {
+    margin-top:14px;
+    padding:15px;
+    border-radius:14px;
+    border:1px solid #cfe2ee;
+    background:linear-gradient(135deg,#eef7fb,#f8fbfd);
+}
+
+.reward-grid {
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:10px;
+}
+
+.reward-item {
+    padding:10px;
+    border-radius:10px;
+    background:#fff;
+    border:1px solid #e1ebf0;
+}
+
+.reward-item .label {
+    display:block;
+    font-size:8px;
+    font-weight:900;
+    color:var(--bayer-muted);
+    text-transform:uppercase;
+}
+
+.reward-item .value {
+    display:block;
+    margin-top:4px;
+    color:var(--bayer-blue);
+    font-size:13px;
+    font-weight:900;
+}
+
+.final-reward-box {
+    margin-top:10px;
+    padding:18px;
+    border-radius:14px;
+    text-align:center;
+    color:#fff;
+    background:linear-gradient(135deg,var(--bayer-blue),var(--bayer-blue-2));
+    box-shadow:0 5px 15px rgba(0,59,122,.18);
+}
+
+.final-reward-box small {
+    display:block;
+    font-size:8px;
+    font-weight:900;
+    letter-spacing:.13em;
+    text-transform:uppercase;
+    opacity:.75;
+}
+
+.final-reward-box div {
+    margin-top:5px;
+    font-size:27px;
+    line-height:1;
+    font-weight:900;
+}
+
+.footer {
+    margin-top:18px;
+    text-align:center;
+    color:#8a9aa7;
+    font-size:8px;
+    line-height:1.7;
+}
+
+.footer strong {
+    color:var(--bayer-blue);
+}
+
+@media (max-width:480px) {
+    body { padding:0; }
+    .main-card {
+        min-height:100vh;
+        border-radius:0;
+        border:0;
+    }
+    .content { padding:16px; }
+    .hero { padding:22px 18px 24px; }
+}
+</style>
 </head>
+
 <body>
+<div class="page">
 
-<div class="main-card">
-    <div class="header">
-        <h2>Reward Sobat 2026</h2>
+    <div class="main-card">
+
+        <header class="hero">
+            <div class="hero-content">
+                <div class="brand">Bayer Crop Science</div>
+                <h1>Reward Sobat 2026</h1>
+                <p>Katalog Reward Produk • Q3 2026</p>
+            </div>
+        </header>
+
+        <div class="green-line"></div>
+
+        <main class="content">
+
+            <label class="section-label" for="prodPicker">
+                Pilih Item Produk
+            </label>
+
+            <div class="select-wrap">
+                <select id="prodPicker" onchange="updateView()">
+                    <option value="">-- Lihat Daftar Produk --</option>
+                </select>
+            </div>
+
+            <section id="display-info" class="info-card">
+
+                <div class="product-head">
+                    <div id="v-name" class="product-name">Produk</div>
+
+                    <div class="badges">
+                        <span id="v-group" class="badge bg-blue">GROUP -</span>
+                        <span id="v-pack" class="badge bg-green">PCS</span>
+                    </div>
+                </div>
+
+                <div class="data-card">
+
+                    <div class="data-row">
+                        <span class="data-label">Ukuran Kemasan</span>
+                        <span id="v-size" class="data-value">-</span>
+                    </div>
+
+                    <div class="data-row">
+                        <span class="data-label">Isi per Dus</span>
+                        <span id="v-pcs" class="data-value">-</span>
+                    </div>
+
+                    <div class="data-row">
+                        <span class="data-label">Point R1</span>
+                        <span id="v-r1" class="data-value">-</span>
+                    </div>
+
+                    <div class="data-row">
+                        <span class="data-label">Point R2</span>
+                        <span id="v-r2" class="data-value">-</span>
+                    </div>
+
+                    <div class="reward-highlight">
+                        <div class="reward-grid">
+
+                            <div class="reward-item">
+                                <span class="label">Reward Sobat</span>
+                                <span id="v-reward" class="value">-</span>
+                            </div>
+
+                            <div class="reward-item">
+                                <span class="label">Pajak Sobat (6%)</span>
+                                <span id="v-tax" class="value">-</span>
+                            </div>
+
+                        </div>
+
+                        <div class="final-reward-box">
+                            <small>Final Reward Sobat</small>
+                            <div id="v-final">-</div>
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+
+            <div class="footer">
+                <strong>SOBAT V 1.2</strong><br>
+                Copyright 2026 by Amrizal Ivan DR NGANJUK. All rights reserved.<br>
+                Powered by Bro Gemini
+            </div>
+
+        </main>
     </div>
-
-    <label>PILIH ITEM PRODUK:</label>
-    <select id="prodPicker" onchange="updateView()">
-        <option value="">-- Lihat Daftar Produk --</option>
-    </select>
-
-    <div id="display-info">
-        <div class="badges">
-            <span id="v-group" class="badge bg-blue">GROUP -</span>
-            <span id="v-pack" class="badge bg-orange">PCS</span>
-        </div>
-        
-        <div class="data-row"><span class="data-label">Ukuran Kemasan</span><span id="v-size" class="data-value" style="color:var(--accent)">-</span></div>
-        <div class="data-row"><span class="data-label">Isi per Dus</span><span id="v-pcs" class="data-value">-</span></div>
-        <div class="data-row"><span class="data-label">Point R1</span><span id="v-r1" class="data-value">-</span></div>
-        <div class="data-row"><span class="data-label">Point R2</span><span id="v-r2" class="data-value">-</span></div>
-        <div class="data-row"><span class="data-label">Reward Sobat</span><span id="v-reward" class="data-value">-</span></div>
-        <div class="data-row"><span class="data-label">Pajak Sobat (6%)</span><span id="v-tax" class="data-value">-</span></div>
-        
-        <div class="final-reward-box">
-            <small>Final Reward Sobat</small>
-            <div id="v-final">-</div>
-        </div>
-    </div>
-</div>
-
-<div class="copyright">
-    SOBAT V 1.2. Copyright 2026 by Amrizal Ivan DR NGANJUK. All rights reserved.<br>
-    Powered by Bro Gemini
 </div>
 
 <script>
@@ -229,6 +518,7 @@ function updateView() {
 
     const d = dataset[idx];
     view.style.display = 'block';
+    document.getElementById('v-name').innerText = d.n;
     document.getElementById('v-group').innerText = "GROUP " + d.g;
     document.getElementById('v-pack').innerText = d.p + " (PCS)";
     document.getElementById('v-size').innerText = d.s;
